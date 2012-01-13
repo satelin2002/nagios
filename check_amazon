@@ -1,0 +1,15 @@
+#!/bin/bash
+
+HOST=$1
+
+ssh -i /home/nagios/resque.pem ubuntu@$HOST ls < /dev/null > /dev/null
+code=$?
+if [ "$code" -ne "0" ]; then
+	# Critical
+	echo "ssh failed2 $HOST"
+	exit 2
+fi 
+
+# Ok
+echo "SSH connection successful"
+exit 0
